@@ -4,7 +4,7 @@ metadata:
   name: nginx-ingress-controller
   namespace: ingress-nginx 
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: ingress-nginx
@@ -36,6 +36,7 @@ spec:
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
             - --annotations-prefix=nginx.ingress.kubernetes.io
+            - --default-ssl-certificate=csp-cert
           env:
             - name: POD_NAME
               valueFrom:
